@@ -42,28 +42,33 @@ struct StoryDisplay: View {
                         .padding(10)
                     }
 
-                    HStack() {
-                        Text("Title")
-                        Spacer()
+
+                    VStack {
+                            HStack() {
+                                Text("Title")
+                                Spacer()
+                            }
+                            .foregroundColor(.white)
+                            .font(.title)
+
+                            HStack() {
+                                Text("Description")
+                                Spacer()
+                            }
+                            .padding(.top, 20)
+                            .foregroundColor(.white)
+
+                            Spacer()
+
+                            Image("image01")
+                                .resizable()
+                                .frame(width: geometry.size.width/2, height: geometry.size.height/2)
+                                .scaledToFill()
+                            Spacer()
+
+                        
                     }
-                    .foregroundColor(.white)
-                    .font(.title)
 
-                    HStack() {
-                        Text("Description")
-                        Spacer()
-                    }
-                    .padding(.top, 20)
-                    .foregroundColor(.white)
-
-                    Spacer()
-
-                    Image("image01")
-                        .resizable()
-                        .frame(width: geometry.size.width/2, height: geometry.size.height/2)
-                        .scaledToFill()
-
-                    Spacer()
 
                     Button {
                         let _ = print("Button pressed 2")
@@ -75,14 +80,34 @@ struct StoryDisplay: View {
                     }
 
 
-
-
-
-
                 }
                 .padding()
 
             }
+            .onAppear {
+                self.storyTimer.start()
+            }
+            .onTapGesture { location in
+                if location.x < geometry.size.width / 2 {
+                    self.storyTimer.advance(by: -1)
+                } else {
+                    self.storyTimer.advance(by: 1)
+                }
+            }
+            .gesture(
+                DragGesture()
+
+                    .onEnded({ value in
+                        if value.translation.width > 0 {
+                            let _ = print("right")
+                            self.storyTimer.advance(by: -1)
+                        } else {
+                            let _ = print("left")
+                            self.storyTimer.advance(by: 1)
+                        }
+                    })
+            )
+
 
 
 //            ZStack() {
