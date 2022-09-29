@@ -34,7 +34,7 @@ struct StoryDisplay: View {
                     HStack() {
                         Spacer()
                         Button {
-                            let _ = print("Button pressed 1")
+                            // Action
                         } label: {
                             Image(systemName: "xmark")
                                 .foregroundColor(Color.white)
@@ -44,158 +44,66 @@ struct StoryDisplay: View {
 
 
                     VStack {
-                            HStack() {
-                                Text("Title")
-                                Spacer()
-                            }
-                            .foregroundColor(.white)
-                            .font(.title)
-
-                            HStack() {
-                                Text("Description")
-                                Spacer()
-                            }
-                            .padding(.top, 20)
-                            .foregroundColor(.white)
-
+                        HStack() {
+                            Text("Title")
                             Spacer()
+                        }
+                        .foregroundColor(.white)
+                        .font(.title)
 
-                            Image("image01")
-                                .resizable()
-                                .frame(width: geometry.size.width/2, height: geometry.size.height/2)
-                                .scaledToFill()
+                        HStack() {
+                            Text("Description")
                             Spacer()
+                        }
+                        .padding(.top, 20)
+                        .foregroundColor(.white)
+
+                        Spacer()
+
+                        Image("image01")
+                            .resizable()
+                            .frame(width: geometry.size.width/2, height: geometry.size.height/2)
+                            .scaledToFill()
+                        Spacer()
 
                         
                     }
 
 
                     Button {
-                        let _ = print("Button pressed 2")
+                        // Action
                     } label: {
                         Text("Button pressed 2")
                             .frame(width: geometry.size.width - 50, height: 50)
                             .background(Color.white)
                             .cornerRadius(5)
                     }
-
-
                 }
                 .padding()
-
             }
             .onAppear {
                 self.storyTimer.start()
-            }
-            .onTapGesture { location in
-                if location.x < geometry.size.width / 2 {
-                    self.storyTimer.advance(by: -1)
-                } else {
-                    self.storyTimer.advance(by: 1)
-                }
             }
             .gesture(
                 DragGesture()
-
-                    .onEnded({ value in
+                    .onEnded { value in
                         if value.translation.width > 0 {
-                            let _ = print("right")
                             self.storyTimer.advance(by: -1)
                         } else {
-                            let _ = print("left")
                             self.storyTimer.advance(by: 1)
                         }
-                    })
-            )
-
-
-
-//            ZStack() {
-//                Rectangle()
-//                    .foregroundColor(.clear)
-//                    .contentShape(Rectangle())
-//                    .frame(width: geometry.size.width/2, height: geometry.size.height/2)
-//                    .background(Color.red)
-//
-//
-//            }
-//
-//            ZStack {
-//                Rectangle()
-//                    .foregroundColor(.clear)
-//                    .contentShape(Rectangle())
-//                    .frame(width: geometry.size.width/2, height: geometry.size.height/2)
-//                    .background(Color.blue)
-//            }
-
-
-//            .background(Color.red)
-//            .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
-
-
-
-
-
-
-
-/*
-            ZStack(alignment: .top) {
-
-                Image("rectangle02")
-                    .resizable()
-                    .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
-                //                    .scaledToFill()
-                //                    .frame(width: geometry.size.width, height: nil, alignment: .center)
-
-
-
-                HStack(alignment: .center, spacing: 4){
-                    ForEach(0..<images.count, id:\.self) { index in
-                        StoryProgressBar(progress: min( max( (CGFloat(self.storyTimer.progress) - CGFloat(index)), 0.0) , 1.0) )
-                            .frame(width:nil, height: 5, alignment:.leading)
-                            .animation(.linear, value: index)
                     }
-                }
-                .padding()
-
-            ZStack() {
-                Button {
-                    let _ = print("Button pressed")
-                } label: {
-                    Text("Button")
-                }
-
-
-            }
-            .background(Color.red)
-            .padding(.top)
-
-
-                HStack(alignment:.center,spacing: 0) {
-                    Rectangle()
-                        .foregroundColor(.clear)
-                        .contentShape(Rectangle())
-                        .onTapGesture {
+            )
+            .gesture(
+                DragGesture(minimumDistance: 0, coordinateSpace: .local)
+                    .onEnded { value in
+                        if value.location.x < geometry.size.width / 2 {
                             self.storyTimer.advance(by: -1)
-                        }
-
-                    Rectangle()
-                        .foregroundColor(.clear)
-                        .contentShape(Rectangle())
-                        .onTapGesture {
+                        } else {
                             self.storyTimer.advance(by: 1)
                         }
-
-                }
-
-
-
-
-            }
-            .onAppear {
-                self.storyTimer.start()
-            }
- */
+                    }
+            )
         }
     }
 }
