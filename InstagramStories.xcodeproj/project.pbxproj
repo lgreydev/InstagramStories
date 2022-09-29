@@ -67,11 +67,11 @@
 				5EA0D3EF28E57E4500295ED9 /* ViewController.swift */,
 				5EA0D3FF28E57F2500295ED9 /* StoryProgressBar.swift */,
 				5EA0D40128E5846E00295ED9 /* StoryTimer.swift */,
+				5EA0D40328E586ED00295ED9 /* StoryDisplay.swift */,
 				5EA0D3F128E57E4500295ED9 /* Main.storyboard */,
 				5EA0D3F428E57E4700295ED9 /* Assets.xcassets */,
 				5EA0D3F628E57E4700295ED9 /* LaunchScreen.storyboard */,
 				5EA0D3F928E57E4700295ED9 /* Info.plist */,
-				5EA0D40328E586ED00295ED9 /* StoryDisplay.swift */,
 			);
 			path = InstagramStories;
 			sourceTree = "<group>";
