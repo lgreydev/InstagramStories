@@ -22,7 +22,7 @@ struct StoryDisplay: View {
     @ObservedObject var storyTimer = StoryTimer(items: 5, interval: 5.0)
 
     var body: some View {
-        ZStack {
+
             ZStack {
                 backgroundImage()
 
@@ -46,10 +46,8 @@ struct StoryDisplay: View {
                 .padding()
             }
             .modifier(StartTimer(time: storyTimer))
-            .modifier(TapGesture(time: storyTimer))
+//            .modifier(TapGesture(time: storyTimer))
             .modifier(SwipeGesture(time: storyTimer))
-        }
-        .modifier(<#T##modifier: T##T#>)
     }
 }
 
@@ -122,54 +120,17 @@ private extension StoryDisplay {
 }
 
 
-
-struct DraggableModifier : ViewModifier {
-
-    enum Direction {
-        case vertical
-        case horizontal
-    }
-
-    let direction: Direction
-
-    @State private var draggedOffset: CGSize = .zero
-
-    func body(content: Content) -> some View {
-        content
-        .offset(
-            CGSize(width: direction == .vertical ? 0 : draggedOffset.width,
-                   height: direction == .horizontal ? 0 : draggedOffset.height)
-        )
-        .gesture(
-            DragGesture()
-            .onChanged { value in
-                self.draggedOffset = value.translation
-            }
-            .onEnded { value in
-                self.draggedOffset = .zero
-            }
-        )
-    }
-}
-
-
 // MARK: Modifier
-struct SwipeGesture: ViewModifier {
+struct StartTimer: ViewModifier {
     let time: StoryTimer
     func body(content: Content) -> some View {
         content
-            .gesture(
-                DragGesture(minimumDistance: 0, coordinateSpace: .local)
-                    .onEnded { value in
-                        if value.location.x < UIScreen.main.bounds.size.width / 2 {
-                            self.time.advance(by: -1)
-                        } else {
-                            self.time.advance(by: 1)
-                        }
-                    }
-            )
+            .onAppear {
+                time.start()
+            }
     }
 }
+
 
 struct TapGesture: ViewModifier {
     let time: StoryTimer
@@ -178,11 +139,11 @@ struct TapGesture: ViewModifier {
             .gesture(
                 DragGesture()
                     .onEnded { value in
+
+
                         if value.translation.width > 0 {
-                            let _ = print("1")
                             self.time.advance(by: -1)
                         } else {
-                            let _ = print("1")
                             self.time.advance(by: 1)
                         }
                     }
@@ -190,13 +151,88 @@ struct TapGesture: ViewModifier {
     }
 }
 
-struct StartTimer: ViewModifier {
+/*
+if value.startLocation.x < value.location.x - 24 {
+            return .left
+          }
+          if value.startLocation.x > value.location.x + 24 {
+            return .right
+          }
+          if value.startLocation.y < value.location.y - 24 {
+            return .down
+          }
+          if value.startLocation.y > value.location.y + 24 {
+            return .up
+          }
+*/
+
+
+
+struct SwipeGesture: ViewModifier {
     let time: StoryTimer
     func body(content: Content) -> some View {
         content
-            .onAppear {
-                time.start()
-            }
+            .gesture(
+                DragGesture(minimumDistance: 0, coordinateSpace: .local)
+                    .onEnded { value in
+//
+//                        if (value.startLocation.x == value.location.x) &&  value.startLocation.x < UIScreen.main.bounds.size.width / 2 {
+//                            self.time.advance(by: -1)
+//                            let _ = print("tap left")
+//                        }
+//
+//                        if (value.startLocation.x == value.location.x) &&  value.startLocation.x > UIScreen.main.bounds.size.width / 2 {
+//                            self.time.advance(by: 1)
+//                            let _ = print("tap right")
+//                        }
+
+/*
+                        if (value.startLocation.x < UIScreen.main.bounds.size.width / 2) &&
+                            (value.location.x < UIScreen.main.bounds.size.width / 2) {
+                            self.time.advance(by: -1)
+                            let _ = print("tap left")
+                        }
+
+                        if (value.startLocation.x > UIScreen.main.bounds.size.width / 2) &&
+                            (value.location.x > UIScreen.main.bounds.size.width / 2) {
+                            self.time.advance(by: 1)
+                            let _ = print("tap right")
+                        }
+*/
+
+
+                        if value.startLocation.x < value.location.x  {
+                            let _ = print("right")
+                            self.time.advance(by: 1)
+                        }
+
+                        
+
+                        if value.startLocation.x > value.location.x {
+                            let _ = print("left")
+                            self.time.advance(by: -1)
+                        }
+
+
+
+
+                        if value.startLocation.y < value.location.y - 24 {
+                            let _ = print("down")
+                        }
+
+                        if value.startLocation.y > value.location.y + 24 {
+                            let _ = print("up")
+                        }
+
+//                        if value.location.x < UIScreen.main.bounds.size.width / 2 {
+//                            self.time.advance(by: -1)
+//                        } else {
+//                            self.time.advance(by: 1)
+//                        }
+
+
+                    }
+            )
     }
 }
 
