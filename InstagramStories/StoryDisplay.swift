@@ -23,31 +23,28 @@ struct StoryDisplay: View {
 
     var body: some View {
 
-            ZStack {
-                backgroundImage()
+        ZStack {
+            backgroundImage()
 
-                VStack() {
-                    progressBar()
-
-                    closeButton()
-
-                    titleText()
-
-                    descriptionLabel()
-
-                    Spacer()
-
-                    animationLottie()
-
-                    Spacer()
-
-                    continueButton()
-                }
-                .padding()
+            HStack {
+                leftActionRectangle()
+                rightActionRectangle()
             }
-            .modifier(StartTimer(time: storyTimer))
-//            .modifier(TapGesture(time: storyTimer))
-            .modifier(SwipeGesture(time: storyTimer))
+
+            VStack {
+                progressBar()
+                closeButton()
+                titleText()
+                descriptionLabel()
+                Spacer()
+                animationLottie()
+                Spacer()
+                continueButton()
+            }
+            .padding()
+        }
+        .modifier(StartTimer(time: storyTimer))
+        .modifier(SwipeGesture(time: storyTimer))
     }
 }
 
@@ -56,6 +53,24 @@ private extension StoryDisplay {
         Image("rectangle02")
             .resizable()
             .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+    }
+
+    func leftActionRectangle() -> some View {
+        Rectangle()
+            .foregroundColor(.clear)
+            .contentShape(Rectangle())
+            .onTapGesture {
+                storyTimer.advance(by: -1)
+            }
+    }
+
+    func rightActionRectangle() -> some View {
+        Rectangle()
+            .foregroundColor(.clear)
+            .contentShape(Rectangle())
+            .onTapGesture {
+                storyTimer.advance(by: 1)
+            }
     }
 
     func progressBar() -> some View {
@@ -105,10 +120,14 @@ private extension StoryDisplay {
             .resizable()
             .frame(width: UIScreen.main.bounds.size.width*0.7,
                    height: UIScreen.main.bounds.size.width*0.7)
+            .allowsHitTesting(false)
     }
 
     func continueButton() -> some View {
         Button {
+            if storyTimer.progress == 5.99 {
+                print("Action")
+            }
             // Action
         } label: {
             Text("Button pressed 2")
@@ -131,110 +150,40 @@ struct StartTimer: ViewModifier {
     }
 }
 
-
-struct TapGesture: ViewModifier {
+struct TapsGesture: ViewModifier {
     let time: StoryTimer
     func body(content: Content) -> some View {
         content
-            .gesture(
-                DragGesture()
-                    .onEnded { value in
-
-
-                        if value.translation.width > 0 {
-                            self.time.advance(by: -1)
-                        } else {
-                            self.time.advance(by: 1)
-                        }
-                    }
-            )
+            .onTapGesture() {
+                time.advance(by: 1)
+            }
     }
 }
-
-/*
-if value.startLocation.x < value.location.x - 24 {
-            return .left
-          }
-          if value.startLocation.x > value.location.x + 24 {
-            return .right
-          }
-          if value.startLocation.y < value.location.y - 24 {
-            return .down
-          }
-          if value.startLocation.y > value.location.y + 24 {
-            return .up
-          }
-*/
-
-
 
 struct SwipeGesture: ViewModifier {
     let time: StoryTimer
     func body(content: Content) -> some View {
         content
             .gesture(
-                DragGesture(minimumDistance: 0, coordinateSpace: .local)
+                DragGesture(minimumDistance: 1, coordinateSpace: .local)
                     .onEnded { value in
-//
-//                        if (value.startLocation.x == value.location.x) &&  value.startLocation.x < UIScreen.main.bounds.size.width / 2 {
-//                            self.time.advance(by: -1)
-//                            let _ = print("tap left")
-//                        }
-//
-//                        if (value.startLocation.x == value.location.x) &&  value.startLocation.x > UIScreen.main.bounds.size.width / 2 {
-//                            self.time.advance(by: 1)
-//                            let _ = print("tap right")
-//                        }
-
-/*
-                        if (value.startLocation.x < UIScreen.main.bounds.size.width / 2) &&
-                            (value.location.x < UIScreen.main.bounds.size.width / 2) {
-                            self.time.advance(by: -1)
-                            let _ = print("tap left")
-                        }
-
-                        if (value.startLocation.x > UIScreen.main.bounds.size.width / 2) &&
-                            (value.location.x > UIScreen.main.bounds.size.width / 2) {
-                            self.time.advance(by: 1)
-                            let _ = print("tap right")
-                        }
-*/
-
 
                         if value.startLocation.x < value.location.x  {
                             let _ = print("right")
                             self.time.advance(by: 1)
                         }
 
-                        
-
                         if value.startLocation.x > value.location.x {
                             let _ = print("left")
                             self.time.advance(by: -1)
                         }
-
-
-
-
-                        if value.startLocation.y < value.location.y - 24 {
-                            let _ = print("down")
-                        }
-
-                        if value.startLocation.y > value.location.y + 24 {
-                            let _ = print("up")
-                        }
-
-//                        if value.location.x < UIScreen.main.bounds.size.width / 2 {
-//                            self.time.advance(by: -1)
-//                        } else {
-//                            self.time.advance(by: 1)
-//                        }
-
-
                     }
             )
     }
 }
+
+
+
 
 
 
