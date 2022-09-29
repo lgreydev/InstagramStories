@@ -10,6 +10,8 @@ import SwiftUI
 
 class ViewController: UIViewController {
 
+    @State private var showingDetail = false
+
     private let button = UIButton(frame: CGRect(x: 0, y: 0, width: 200, height: 50))
 
     override func viewDidLoad() {
@@ -29,7 +31,7 @@ private extension ViewController {
     }
 
     @objc func didTapButton() {
-        let vc = UIHostingController(rootView: StoryProgressBar(progress: 0.1))
+        let vc = UIHostingController(rootView: StoryDisplay())
         present(vc, animated: true)
     }
 }

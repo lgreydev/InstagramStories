@@ -12,22 +12,18 @@ struct StoryProgressBar: View {
     var progress: CGFloat
 
     var body: some View {
-        GeometryReader { geometry in
-            ZStack(alignment: .leading) {
+        GeometryReader{ geometry in
+            ZStack(alignment:.leading){
                 Rectangle()
-                    .foregroundColor(.white.opacity(05))
+                    .foregroundColor(Color.white.opacity(0.5))
                     .cornerRadius(5)
-                Rectangle()
-                    .frame(width: geometry.size.width * self.progress,
-                           height: nil,
-                           alignment: .leading)
+                Rectangle().frame(width: geometry.size.width * self.progress,height: nil,alignment: .leading)
                     .foregroundColor(.white)
                     .cornerRadius(5)
             }
         }
     }
 }
-
 
 struct LoadingProgressBar_Previews: PreviewProvider {
     static var previews: some View {
