@@ -13,7 +13,9 @@
 		5EA0D3F328E57E4500295ED9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EA0D3F128E57E4500295ED9 /* Main.storyboard */; };
 		5EA0D3F528E57E4700295ED9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EA0D3F428E57E4700295ED9 /* Assets.xcassets */; };
 		5EA0D3F828E57E4700295ED9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EA0D3F628E57E4700295ED9 /* LaunchScreen.storyboard */; };
-		5EA0D40028E57F2500295ED9 /* LoadingProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA0D3FF28E57F2500295ED9 /* LoadingProgressBar.swift */; };
+		5EA0D40028E57F2500295ED9 /* StoryProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA0D3FF28E57F2500295ED9 /* StoryProgressBar.swift */; };
+		5EA0D40228E5846E00295ED9 /* StoryTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA0D40128E5846E00295ED9 /* StoryTimer.swift */; };
+		5EA0D40428E586ED00295ED9 /* StoryDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA0D40328E586ED00295ED9 /* StoryDisplay.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,7 +27,9 @@
 		5EA0D3F428E57E4700295ED9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5EA0D3F728E57E4700295ED9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5EA0D3F928E57E4700295ED9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5EA0D3FF28E57F2500295ED9 /* LoadingProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingProgressBar.swift; sourceTree = "<group>"; };
+		5EA0D3FF28E57F2500295ED9 /* StoryProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryProgressBar.swift; sourceTree = "<group>"; };
+		5EA0D40128E5846E00295ED9 /* StoryTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryTimer.swift; sourceTree = "<group>"; };
+		5EA0D40328E586ED00295ED9 /* StoryDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryDisplay.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,11 +65,13 @@
 				5EA0D3EB28E57E4500295ED9 /* AppDelegate.swift */,
 				5EA0D3ED28E57E4500295ED9 /* SceneDelegate.swift */,
 				5EA0D3EF28E57E4500295ED9 /* ViewController.swift */,
-				5EA0D3FF28E57F2500295ED9 /* LoadingProgressBar.swift */,
+				5EA0D3FF28E57F2500295ED9 /* StoryProgressBar.swift */,
+				5EA0D40128E5846E00295ED9 /* StoryTimer.swift */,
 				5EA0D3F128E57E4500295ED9 /* Main.storyboard */,
 				5EA0D3F428E57E4700295ED9 /* Assets.xcassets */,
 				5EA0D3F628E57E4700295ED9 /* LaunchScreen.storyboard */,
 				5EA0D3F928E57E4700295ED9 /* Info.plist */,
+				5EA0D40328E586ED00295ED9 /* StoryDisplay.swift */,
 			);
 			path = InstagramStories;
 			sourceTree = "<group>";
@@ -144,7 +150,9 @@
 				5EA0D3F028E57E4500295ED9 /* ViewController.swift in Sources */,
 				5EA0D3EC28E57E4500295ED9 /* AppDelegate.swift in Sources */,
 				5EA0D3EE28E57E4500295ED9 /* SceneDelegate.swift in Sources */,
-				5EA0D40028E57F2500295ED9 /* LoadingProgressBar.swift in Sources */,
+				5EA0D40228E5846E00295ED9 /* StoryTimer.swift in Sources */,
+				5EA0D40428E586ED00295ED9 /* StoryDisplay.swift in Sources */,
+				5EA0D40028E57F2500295ED9 /* StoryProgressBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

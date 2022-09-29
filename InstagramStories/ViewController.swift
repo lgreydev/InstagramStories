@@ -29,7 +29,7 @@ private extension ViewController {
     }
 
     @objc func didTapButton() {
-        let vc = UIHostingController(rootView: LoadingProgressBar(progress: 0.1))
+        let vc = UIHostingController(rootView: StoryProgressBar(progress: 0.1))
         present(vc, animated: true)
     }
 }

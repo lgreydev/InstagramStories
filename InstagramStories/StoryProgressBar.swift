@@ -1,5 +1,5 @@
 //
-//  LoadingProgressBar.swift
+//  StoryProgressBar.swift
 //  InstagramStories
 //
 //  Created by Sergey Lukaschuk on 29.09.2022.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct LoadingProgressBar: View {
+struct StoryProgressBar: View {
 
     var progress: CGFloat
 
@@ -29,10 +29,8 @@ struct LoadingProgressBar: View {
 }
 
 
-
-
 struct LoadingProgressBar_Previews: PreviewProvider {
     static var previews: some View {
-        LoadingProgressBar(progress: 0.1)
+        StoryProgressBar(progress: 0.1)
     }
 }
