@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  FirstViewController.swift
 //  InstagramStories
 //
 //  Created by Sergey Lukaschuk on 29.09.2022.
@@ -8,9 +8,7 @@
 import UIKit
 import SwiftUI
 
-class ViewController: UIViewController {
-
-    @State private var showingDetail = false
+class FirstViewController: UIViewController {
 
     private let button = UIButton(frame: CGRect(x: 0, y: 0, width: 200, height: 50))
 
@@ -21,7 +19,7 @@ class ViewController: UIViewController {
     }
 }
 
-private extension ViewController {
+private extension FirstViewController {
     func setupButton() {
         view.addSubview(button)
         button.center = view.center
