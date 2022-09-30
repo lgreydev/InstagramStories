@@ -12,6 +12,8 @@ struct StoryDisplay: View {
     var dismiss: (() -> Void)?
     var present: (()->Void)?
 
+
+
     let images: [String] = ["image01", "image02", "image03", "image04", "image05"]
 
     let descriptions: [String] = [
@@ -21,6 +23,9 @@ struct StoryDisplay: View {
         "description_4",
         "description_5",
     ]
+
+    let timer = Timer.publish(every: 4, on: .main, in: .common).autoconnect()
+    @State private var counter = 0.0
 
     @ObservedObject var storyTimer = StoryTimer(items: 5, interval: 5.0)
 
@@ -45,6 +50,11 @@ struct StoryDisplay: View {
                 continueButton()
             }
             .padding()
+        }
+        .onReceive(storyTimer.$progress) { _ in
+            if storyTimer.progress > 4.98 {
+                self.present?()
+            }
         }
         .modifier(StartTimer(time: storyTimer))
         .modifier(SwipeGesture(time: storyTimer))
@@ -148,16 +158,6 @@ struct StartTimer: ViewModifier {
         content
             .onAppear {
                 time.start()
-            }
-    }
-}
-
-struct TapsGesture: ViewModifier {
-    let time: StoryTimer
-    func body(content: Content) -> some View {
-        content
-            .onTapGesture() {
-                time.advance(by: 1)
             }
     }
 }
