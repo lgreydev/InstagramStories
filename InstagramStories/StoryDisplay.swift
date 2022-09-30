@@ -9,6 +9,9 @@ import SwiftUI
 
 struct StoryDisplay: View {
 
+    var dismiss: (() -> Void)?
+    var present: (()->Void)?
+
     let images: [String] = ["image01", "image02", "image03", "image04", "image05"]
 
     let descriptions: [String] = [
@@ -87,18 +90,20 @@ private extension StoryDisplay {
         HStack() {
             Spacer()
             Button {
-                // Action
+                let _ = print("close")
+                self.dismiss?()
             } label: {
                 Image(systemName: "xmark")
                     .foregroundColor(Color.white)
+                    .font(.title2.bold())
             }
-            .padding(10)
         }
+        .padding(10)
     }
 
     func titleText() -> some View {
         HStack() {
-            Text("maib biometric")
+            Text("maib biometric").bold()
             Spacer()
         }
         .foregroundColor(.white)
@@ -125,10 +130,7 @@ private extension StoryDisplay {
 
     func continueButton() -> some View {
         Button {
-            if storyTimer.progress == 5.99 {
-                print("Action")
-            }
-            // Action
+            self.present?()
         } label: {
             Text("Button pressed 2")
                 .frame(width: UIScreen.main.bounds.size.width - 50, height: 50)

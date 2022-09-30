@@ -30,6 +30,16 @@ private extension FirstViewController {
 
     @objc func didTapButton() {
         let vc = UIHostingController(rootView: StoryDisplay())
-        present(vc, animated: true)
+
+        vc.rootView.dismiss = {
+            vc.dismiss(animated: true, completion: nil)
+        }
+
+        vc.rootView.present = {
+            let secondViewController = SecondViewController()
+            vc.show(secondViewController, sender: nil)
+        }
+
+        present(vc, animated: true, completion: nil)
     }
 }
