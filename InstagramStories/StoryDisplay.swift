@@ -30,7 +30,6 @@ struct StoryDisplay: View {
     @ObservedObject var storyTimer = StoryTimer(items: 5, interval: 5.0)
 
     var body: some View {
-
         ZStack {
             backgroundImage()
 
